@@ -1,57 +1,82 @@
 // A library for representing a user "model".
 
 // Represents the next user ID:
-var nextUID = 0;
+// var nextUID = 0;
 
-// A function for creating "users".
-function user(name, pass, admin) {
-  return {
-    name: name,
-    pass: pass,
-    uid : ++nextUID,
-    admin : admin
-  };
-}
+// // A function for creating "users".
+// function user(name, pass, admin) {
+//   return {
+//     name: name,
+//     pass: pass,
+//     uid : ++nextUID,
+//     admin : admin
+//   };
+// }
 var mongojs = require('mongojs');
 var connstr = 'mongodb://eagles:thirdfloorlounge@ds045054.mongolab.com:45054/users';
 var database = mongojs(connstr, [], {authMechanism: 'ScramSHA1'});
 var users = database.collection('users');
 // This is an in-memory mock database until we look at a real one!
-var db = {
-  'tim'  : user('tim', 'mit', true),
-  'hazel': user('hazel', 'lezah', false),
-  'caleb': user('caleb', 'belac', false)
-};
+// var db = {
+//   'tim'  : user('tim', 'mit', true),
+//   'hazel': user('hazel', 'lezah', false),
+//   'caleb': user('caleb', 'belac', false)
+// };
 
 exports.lookup = (usr, pass, cb) => {
+  var firstTime = true;
+  console.log("I made it!");
   var cursor = users.find({
-    username: usr,
-  });
-
+    username: usr
+  }).limit(1);
+  console.log("Did the query!");
   cursor.forEach(function (err, doc){
+    console.log("Made it in the loop!");
     if(err)
     {
-      console.log('error: ' + err);
-      return;
+      if(firstTime)
+      {
+        console.log('error: ' + err);
+        firstTime = false;
+        return;
+      }
+
+      else
+      {
+        return;
+      }
+      
     }
 
     if(doc == null)
     {
-      cb('user "' + usr + '" does not exist');
+      if (firstTime) 
+      {
+        firstTime = false;
+        console.log("Wrong username!");
+        cb('user "' + usr + '" does not exist');
+      }
+
+      else
+      {
+        return;
+      }
     }
 
-    if(doc.username === usr and doc.password === pass)
+    else if(doc.username === usr && doc.password === pass)
     {
       cb(undefined, {name: doc.username, admin: doc.admin});
+      console.log("Finished callback!");
     }
 
-    if(doc.password !== pass)
+    else if(doc.password !== pass)
     {
+      console.log("Wrong password!");
       cb('password is invalid');
     }
   });
-
-}
+  console.log("Finished the loop!");
+};
 // Returns a user object if the user exists in the db.
 // The callback signature is cb(error, userobj), where error is
 // undefined if there is no error or a string indicating the error
@@ -72,7 +97,9 @@ exports.lookup = (usr, pass, cb) => {
 // };
   exports.list = (cb) => {
     var userList = [];
-    var cursor = users.find();
+    var cursor = users.find(
+        {username: {$exists: true}}, {username: 1}
+      );
     cursor.foreEach(function(err, doc){
       if (err){
         console.log('error: ' + err);
@@ -86,12 +113,12 @@ exports.lookup = (usr, pass, cb) => {
 
       else
       {
-        userList.push({doc.username, doc.password, doc.uid, doc.admin});
+        userList.push({name: doc.username, pass: doc.password, uid: doc.uid, admin: doc.admin});
       }
 
 
     });
-  }
+  };
 // exports.list = (cb) => {
 //   // TODO: Add the list functionality.
 //   // The list function receives a callback with the following signature:
@@ -171,7 +198,7 @@ exports.add = (u, cb) => {
       cb(undefined, newUser);
     }
   });
-}
+};
 
 // exports.add = (u, cb) => {
 //   // TODO: Add the add new user functionality.
@@ -229,14 +256,14 @@ exports.add = (u, cb) => {
 //       db[name] = newUser;
 //       cb(undefined, newUser);
 //     }
-  //
-  // You will be graded on the following:
-  //   (1) You correctly determine if the user already exists.
-  //   (2) You send a sensible error message to the callback.
-  //   (3) You correctly create a new user.
-  //   (4) You correctly add the new user to the database.
-  //   (5) You correctly copy the UID to the `u` argument.
-  //   (6) You correctly call the callback with the correct user information.
-  //
+//   //
+//   // You will be graded on the following:
+//   //   (1) You correctly determine if the user already exists.
+//   //   (2) You send a sensible error message to the callback.
+//   //   (3) You correctly create a new user.
+//   //   (4) You correctly add the new user to the database.
+//   //   (5) You correctly copy the UID to the `u` argument.
+//   //   (6) You correctly call the callback with the correct user information.
+//   //
   
-};
+// };

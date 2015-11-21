@@ -12,7 +12,10 @@ function user(name, pass, admin) {
     admin : admin
   };
 }
-
+var mongojs = require('mongojs');
+var connstr = 'mongodb://eagles:thirdfloorlounge@ds045054.mongolab.com:45054/users';
+var database = mongojs(connstr, [], {authMechanism: 'ScramSHA1'});
+var users = database.collection('users');
 // This is an in-memory mock database until we look at a real one!
 var db = {
   'tim'  : user('tim', 'mit', true),

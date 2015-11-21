@@ -65,14 +65,34 @@ exports.lookup = (usr, pass, cb) => {
 
     else if(doc.username === usr && doc.password === pass)
     {
-      cb(undefined, {name: doc.username, admin: doc.admin});
-      console.log("Finished callback!");
+      if(firstTime)
+      {
+        firstTime = false;
+        cb(undefined, {name: doc.username, admin: doc.admin});
+        console.log("Finished callback!");
+      }
+
+      else
+      {
+        return;
+      }
+      
     }
 
     else if(doc.password !== pass)
     {
-      console.log("Wrong password!");
-      cb('password is invalid');
+      if(firstTime)
+      {
+        firstTime = false;
+        console.log("Wrong password!");
+        cb('password is invalid');
+      }
+
+      else
+      {
+        return;
+      }
+      
     }
   });
   console.log("Finished the loop!");

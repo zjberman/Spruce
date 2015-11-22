@@ -107,7 +107,8 @@ router.get('/main', function(req, res) {
     // capture the user object or create a default.
     var message = req.flash('main') || 'Login Successful';
     res.render('branch', {username : user.name,
-                          button   : "Logout" });
+                          button   : 'Logout',
+                          link     :'/user/logout'});
   }
 });
 
@@ -127,6 +128,51 @@ router.get('/online', function(req, res) {
       online: online
     });
   }
+});
+
+router.get('/register', (req, res) => {
+     var user = req.session.user;
+    
+     if(user && online[user.name])
+     {
+        req.flash('branch', 'Login expired!');
+        res.redirect('/user/main');
+     }
+
+     else
+     {
+        res.render('register', {button: "Login"});
+        // var name  = req.body.name;
+        // var pass  = req.body.pass;
+        // var email = req.body.email;
+        // // console.log('name ' + name);
+        // // console.log('pass ' + pass);
+        // // console.log(!name);
+        // if(name && pass && email)
+        // {
+        //     req.flash('register', 'Missing one or more required fields.');
+        //     res.redirect('/user/register');
+        // }
+
+        // else 
+        // {
+        //   var newUser = {name, pass, admin};
+        //     model.add(newUser, function(error, newUser){
+        //       if(error)
+        //       {
+        //           req.flash('register', error);
+        //           res.render('/user/register');
+        //       }
+
+        //       else
+        //       {
+        //           req.flash('login', 'User has been added!');
+        //           res.redirect('/user/login');
+        //       }
+        //     });
+        // }
+     }
+  
 });
 
 module.exports = router;

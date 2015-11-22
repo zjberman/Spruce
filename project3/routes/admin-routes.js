@@ -47,8 +47,8 @@ router.get('/list', (req, res) => {
 
           else
           {
-              var message = req.flash('user-list');
-              res.render('user-list', {message: message, users: allUsers});
+              var message = req.flash('admin');
+              res.render('admin', {message: message, users: allUsers});
           }
         });
      }
@@ -165,5 +165,48 @@ router.post('/user', (req, res) => {
   // Replace below with your implementation.
   
 });
+
+router.get('/', (req, res) => {
+  var user = req.session.user;
+     if(!user)
+     {
+        req.flash('login', 'User object does not exist!');
+        res.redirect('/user/login');
+     } 
+
+     else if(user && !online[user.name])
+     {
+        req.flash('login', 'Login expired!');
+        res.redirect('/user/login');
+     }
+
+     else if(user.admin === false)
+     {
+        req.flash('main', 'You need admin credentials to access this route!');
+        res.redirect('/user/main'); 
+     }
+
+     else
+     {
+        var list = model.list(function(error, allUsers){
+
+          if(error)
+          {
+              req.flash('login', 'User already exists in database!');
+              res.redirect('/user/login');
+          }
+
+          else
+          {
+              var message = req.flash('admin');
+              res.render('admin', {message: message, 
+                                   users  : allUsers,
+                                   button : "Logout",
+                                   link   : "/user/logout"});
+          }
+        });
+     }
+});
+
 
 module.exports = router;

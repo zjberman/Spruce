@@ -11,6 +11,11 @@ html {
 body {
 	background-color: #e5ffe5;
 }
+.rounded {
+	-webkit-border-radius: 28;
+	-moz-border-radius: 28;
+	border-radius: 28px;
+}
 .sh1 {
 	font-family: 'Montserrat', sans-serif;
 	font-size: 24px;
@@ -129,7 +134,9 @@ body {
 			<div class="sbox">&nbsp</div>
 		</span>
 		<span style="float:left;width:30%">
-			<button class="sbtn">{{{button}}}</button>
+			<a href = "{{{link}}}">
+				<button class="sbtn">{{{button}}}</button>
+			</a>
 		</span>
 	</div>
 	<div style="clear: both; float: left; display: block; position: relative; margin: 5px;">

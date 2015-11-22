@@ -79,7 +79,7 @@ exports.lookup = (usr, pass, cb) => {
       if(firstTime)
       {
         firstTime = false;
-        console.log("Wrong password!");
+        cb('password is invalid');
       }
 
       else
@@ -111,9 +111,9 @@ exports.lookup = (usr, pass, cb) => {
   exports.list = (cb) => {
     var userList = [];
     var cursor = users.find(
-        {username: {$exists: true}}, {username: 1}
+        {username: {$exists: true}}
       );
-    cursor.foreEach(function(err, doc){
+    cursor.forEach(function(err, doc){
       if (err){
         console.log('error: ' + err);
         return;
@@ -121,12 +121,12 @@ exports.lookup = (usr, pass, cb) => {
 
       if(doc == null)
       {
-        return;
+        cb(undefined, userList);
       }
 
       else
       {
-        userList.push({name: doc.username, pass: doc.password, uid: doc.uid, admin: doc.admin});
+        userList.push({name: doc.username, pass: doc.password, uid: doc.uid, admin: doc.admin, email: doc.email});
       }
 
 
@@ -163,10 +163,14 @@ exports.lookup = (usr, pass, cb) => {
 // };
 
 exports.add = (u, cb) => {
+  theUid = null;
+  var firstTime = true;
   var cursor = users.find({
-    username: u.name,
+    $or:[
+      {username: u.name},
+      {email   : u.email}
+    ]
   });
-
   cursor.forEach(function(err, doc) {
     if(err)
     {
@@ -174,42 +178,59 @@ exports.add = (u, cb) => {
       return;
     }
 
-    if(doc == null)
+    else if(doc === null && firstTime)
     {
-      process.exit(0);
-    }
-
-    else
-    {
+      firstTime = false;
       var name  = u.name; //needed because u.name can't be in push for some reason.
       var pass  = u.pass;
       var admin = u.admin;
+      var email = u.email;
       users.update(
         {isTheUid: true},
         {$inc: {uid: 1}}
       );
       var uid = users.find(
-        {isTheUid: true},
-        {uid: 1}
+        {isTheUid: true}
       );
-      if(admin === 'no')
-      {
-        admin = false;
-      }
-      else
-      {
-        admin = true;
-      }
+      uid.forEach(function(err, doc2){
+        if(err)
+        {
+          console.log("error: " + err);
+          return;
+        }
+        
+        else if(doc2 !== null)
+        {
+          theUid = doc2.uid;
+          var newUser = users.insert({
+            username: name,
+            password: pass,
+            admin   : admin,
+            uid     : theUid,
+            email   : email
+          });
 
-      var newUser = users.insert({
-        username: name,
-        password: pass,
-        admin: admin,
-        uid: uid
+          cb(undefined, newUser);
+        }
       });
-
-      cb(undefined, newUser);
     }
+
+    else if(doc === null && firstTime === false)
+    {
+      return;
+    }
+    else if(doc.username === u.name && firstTime)
+    {
+      firstTime = false;
+      cb('Username already exists!');
+    }
+
+    else if(doc.email === u.email && firstTime)
+    {
+      firstTime = false;
+      cb('Email already exists!');
+    }
+
   });
 };
 

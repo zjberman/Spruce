@@ -22,7 +22,8 @@ router.get('/login', (req, res) => {
   else {
     // Grab any messages being sent to us from redirect:
     var message = req.flash('login') || '';
-    res.render('login', { button  : 'Register' });
+    res.render('login', { button  : 'Register', 
+                          link    : "/user/register" });
   }
 });
 
@@ -106,9 +107,9 @@ router.get('/main', function(req, res) {
   else {
     // capture the user object or create a default.
     var message = req.flash('main') || 'Login Successful';
-    res.render('user', { title   : 'User Main',
-                         message : message,
-                         name    : user.name });
+    res.render('branch', {username : user.name,
+                          button   : 'Logout',
+                          link     :'/user/logout'});
   }
 });
 
@@ -128,6 +129,83 @@ router.get('/online', function(req, res) {
       online: online
     });
   }
+});
+
+router.get('/register', (req, res) => {
+     var user = req.session.user;
+    
+     if(user && online[user.name])
+     {
+        req.flash('branch', 'Login expired!');
+        res.redirect('/user/main');
+     }
+
+     else
+     {
+        res.render('register', {button : "Login",
+                                link   : "/user/login"});
+        // var name  = req.body.name;
+        // var pass  = req.body.pass;
+        // var email = req.body.email;
+        // // console.log('name ' + name);
+        // // console.log('pass ' + pass);
+        // // console.log(!name);
+        // if(name && pass && email)
+        // {
+        //     req.flash('register', 'Missing one or more required fields.');
+        //     res.redirect('/user/register');
+        // }
+
+        // else 
+        // {
+        //   var newUser = {name, pass, admin};
+        //     model.add(newUser, function(error, newUser){
+        //       if(error)
+        //       {
+        //           req.flash('register', error);
+        //           res.render('/user/register');
+        //       }
+
+        //       else
+        //       {
+        //           req.flash('login', 'User has been added!');
+        //           res.redirect('/user/login');
+        //       }
+        //     });
+        // }
+     }
+  
+});
+
+router.post('/add', (req, res) => {
+ 
+  // Pull the values from the form:
+  var name  = req.body.name;
+  var pass  = req.body.pass;
+  var admin = false;
+  var email = req.body.email;
+
+  if (!name || !pass || !email) {
+    req.flash('register', 'did not provide the proper credentials');
+    res.redirect('/user/register');
+  }
+  else {
+    var newUser = {name, pass, admin, email};
+    model.add(newUser, function(error, user) {
+      if (error) {
+        // Pass a message to login:
+        req.flash('register', error);
+        res.redirect('/user/register');
+      }
+      else {
+        
+        // Pass a message to main:
+        req.flash('login', 'authentication successful');
+        res.redirect('/user/login');
+      }
+    });
+  }
+  
 });
 
 module.exports = router;

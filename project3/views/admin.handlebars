@@ -1,0 +1,44 @@
+<p class="sh1" style="margin: 10px 10px 10px 10px;">
+	User Administration
+</p>
+<table class="table table-striped table-hover" style="margin:auto;width:90%;">
+	<thead>
+	<tr style="background:green;">
+		<td>
+			User ID
+		</td>
+		<td>
+			Username
+		</td>
+		<td>
+			Password
+		</td>
+		<td>
+			Email
+		</td>
+		<td>
+			Admin
+		</td>
+	</tr>
+	</thead>
+	<tbody>
+	{{#each users}}
+	<tr>
+		<td>
+			{{uid}}
+		</td>
+		<td>
+			{{name}}
+		</td>
+		<td>
+			{{pass}}
+		</td>
+		<td>
+			{{email}}
+		<td>
+			{{admin}}
+		</td>
+	</tr>
+	{{/each}}
+	</tbody>
+</table>

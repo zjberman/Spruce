@@ -114,6 +114,7 @@ router.get('/main', function(req, res) {
                           adminbutton: 
     "<a href = '/admin'><button class='sbtn'>Users</button></a>"
                           });
+  }
   
   else {
     // capture the user object or create a default.

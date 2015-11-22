@@ -22,8 +22,7 @@ router.get('/login', (req, res) => {
   else {
     // Grab any messages being sent to us from redirect:
     var message = req.flash('login') || '';
-    res.render('login', { title   : 'User Login',
-                          message : message });
+    res.render('login', { button  : 'Register' });
   }
 });
 

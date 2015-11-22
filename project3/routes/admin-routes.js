@@ -199,7 +199,10 @@ router.get('/', (req, res) => {
           else
           {
               var message = req.flash('admin');
-              res.render('admin', {message: message, users: allUsers});
+              res.render('admin', {message: message, 
+                                   users  : allUsers,
+                                   button : "Logout",
+                                   link   : "/user/logout"});
           }
         });
      }

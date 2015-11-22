@@ -2,10 +2,42 @@
 	User Administration
 </p>
 <script>
-	function isAdmin(uid){
-		alert(document.getElementById('adminCheckbox' + uid).checked);
+	function autofillFields(s){
+		document.getElementById("addadmin").value    = s;
+		document.getElementById("deleteuser").value  = s;
+		document.getElementById("removeadmin").value = s;
 	}
 </script>
+<div width="100%">
+	<span style="float:right;margin:0px 50px 0px 0px;">
+		<form class="form-inline" role="form">
+			<div class="form-group">
+				<label>Add admin:</label>
+				<input class="form-control" id="addadmin" placeholder="Enter username">
+			</div>
+			<button type="submit" class="btn btn-default">Apply</button>
+		</form>
+	</span>
+	<span style="float:left;margin:0px 0px 0px 50px;">
+		<form class="form-inline" role="form">
+			<div class="form-group">
+				<label>Delete user:</label>
+				<input class="form-control" id="deleteuser" placeholder="Enter username">
+			</div>
+			<button type="submit" class="btn btn-default">Delete</button>
+		</form>
+	</span>
+	<span style="float:right;margin:10px 50px 20px 0px;">
+		<form class="form-inline" role="form">
+			<div class="form-group">
+				<label>Remove admin:</label>
+				<input class="form-control" id="removeadmin" placeholder="Enter username">
+			</div>
+			<button type="submit" class="btn btn-default">Apply</button>
+		</form>
+	</span>
+</div>
+<div style="clear:both;float:left;width:100%;">
 <table class="table table-striped table-hover" style="margin:auto;width:90%;">
 	<thead>
 	<tr style="background:green;color:white;font-weight:bold;">
@@ -24,14 +56,11 @@
 		<td>
 			Admin
 		</td>
-		<td>
-			Delete
-		</td>
 	</tr>
 	</thead>
 	<tbody>
 	{{#each users}}
-	<tr>
+	<tr onclick="autofillFields('{{name}}');">
 		<td>
 			{{uid}}
 		</td>
@@ -44,18 +73,23 @@
 		<td>
 			{{email}}
 		<td>
-			<input id="currentCheckbox" type="checkbox" name="" value="admin" onclick="isAdmin({{uid}});">
+			<input id="currentCheckbox" type="checkbox" name="" value="admin" disabled="disabled">
 			<script>
 				document.getElementById('currentCheckbox').checked = {{admin}};
 				document.getElementById('currentCheckbox').id = 'adminCheckbox' + {{uid}};
 			</script>
 		</td>
+<<<<<<< HEAD
+=======
 		<td>
 			<form role="form" method="post" action="/admin/delete">
 				<button name={{name}}>Delete</button>
 			</form>
 		</td>
+>>>>>>> d112ed5b797886a557346a22f83534cdf564e1c1
 	</tr>
 	{{/each}}
 	</tbody>
+</table>
+</div>
 </table>

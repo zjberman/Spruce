@@ -231,6 +231,7 @@ router.post('/add', (req, res) => {
     res.redirect('/user/register');
   }
   else {
+    console.log("Going to do model.add!");
     var newUser = {name, pass, admin, email};
     model.add(newUser, function(error, user) {
       if (error) {

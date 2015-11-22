@@ -163,6 +163,7 @@ exports.lookup = (usr, pass, cb) => {
 // };
 
 exports.add = (u, cb) => {
+  console.log("Made it into export!");
   theUid = null;
   var firstTime = true;
   var cursor = users.find({
@@ -180,6 +181,7 @@ exports.add = (u, cb) => {
 
     else if(doc === null && firstTime)
     {
+      console.log("Beginning to add...");
       firstTime = false;
       var name  = u.name; //needed because u.name can't be in push for some reason.
       var pass  = u.pass;
@@ -195,12 +197,14 @@ exports.add = (u, cb) => {
       uid.forEach(function(err, doc2){
         if(err)
         {
+          console.log("Error?");
           console.log("error: " + err);
           return;
         }
         
         else if(doc2 !== null)
         {
+          console.log("Adding to db!");
           theUid = doc2.uid;
           var newUser = users.insert({
             username: name,
@@ -209,7 +213,7 @@ exports.add = (u, cb) => {
             uid     : theUid,
             email   : email
           });
-
+          console.log("Almost there!");
           cb(undefined, newUser);
         }
       });
@@ -217,6 +221,7 @@ exports.add = (u, cb) => {
 
     else if(doc === null && firstTime === false)
     {
+      console.log("Should be end!");
       return;
     }
     else if(doc.username === u.name && firstTime)

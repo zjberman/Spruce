@@ -166,4 +166,31 @@ router.post('/user', (req, res) => {
   
 });
 
+router.get('/', (req, res) => {
+  var user = req.session.user;
+     if(!user)
+     {
+        req.flash('login', 'User object does not exist!');
+        res.redirect('/user/login');
+     } 
+
+     else if(user && !online[user.name])
+     {
+        req.flash('login', 'Login expired!');
+        res.redirect('/user/login');
+     }
+
+     else if(user.admin === false)
+     {
+        req.flash('main', 'You need admin credentials to access this route!');
+        res.redirect('/user/main'); 
+     }
+
+     else
+     {
+        res.render('admin', {name: user.name, pass: user.pass, admin: user.admin, uid: user.uid});
+     }
+});
+
+
 module.exports = router;

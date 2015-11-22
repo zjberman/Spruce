@@ -202,6 +202,7 @@ router.get('/', (req, res) => {
               res.render('admin', {message: message, 
                                    users  : allUsers,
                                    button : "Logout",
+                                   buttonwidth: 40,
                                    link   : "/user/logout"});
           }
         });

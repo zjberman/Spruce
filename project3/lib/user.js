@@ -25,13 +25,10 @@ var users = database.collection('users');
 
 exports.lookup = (usr, pass, cb) => {
   var firstTime = true;
-  console.log("I made it!");
   var cursor = users.find({
     username: usr
   }).limit(1);
-  console.log("Did the query!");
   cursor.forEach(function (err, doc){
-    console.log("Made it in the loop!");
     if(err)
     {
       if(firstTime)
@@ -53,7 +50,6 @@ exports.lookup = (usr, pass, cb) => {
       if (firstTime) 
       {
         firstTime = false;
-        console.log("Wrong username!");
         cb('user "' + usr + '" does not exist');
       }
 
@@ -69,7 +65,6 @@ exports.lookup = (usr, pass, cb) => {
       {
         firstTime = false;
         cb(undefined, {name: doc.username, admin: doc.admin});
-        console.log("Finished callback!");
       }
 
       else
@@ -84,7 +79,6 @@ exports.lookup = (usr, pass, cb) => {
       if(firstTime)
       {
         firstTime = false;
-        console.log("Wrong password!");
         cb('password is invalid');
       }
 
@@ -95,7 +89,6 @@ exports.lookup = (usr, pass, cb) => {
       
     }
   });
-  console.log("Finished the loop!");
 };
 // Returns a user object if the user exists in the db.
 // The callback signature is cb(error, userobj), where error is
@@ -128,7 +121,7 @@ exports.lookup = (usr, pass, cb) => {
 
       if(doc == null)
       {
-        process.exit(0);
+        return;
       }
 
       else
@@ -181,9 +174,9 @@ exports.add = (u, cb) => {
       return;
     }
 
-    if(doc == null)
+    if(doc.username === u.name)
     {
-      process.exit(0);
+      cb('Username already exists!');
     }
 
     else

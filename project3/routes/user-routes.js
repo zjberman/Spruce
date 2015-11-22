@@ -22,8 +22,7 @@ router.get('/login', (req, res) => {
   else {
     // Grab any messages being sent to us from redirect:
     var message = req.flash('login') || '';
-    res.render('login', { title   : 'User Login',
-                          message : message });
+    res.render('login', { button  : 'Register' });
   }
 });
 
@@ -107,9 +106,8 @@ router.get('/main', function(req, res) {
   else {
     // capture the user object or create a default.
     var message = req.flash('main') || 'Login Successful';
-    res.render('user', { title   : 'User Main',
-                         message : message,
-                         name    : user.name });
+    res.render('branch', {username : user.name,
+                          button   : "Logout" });
   }
 });
 

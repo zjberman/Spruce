@@ -174,9 +174,9 @@ exports.add = (u, cb) => {
       return;
     }
 
-    if(doc == null)
+    if(doc.username === u.name)
     {
-      process.exit(0);
+      cb('Username already exists!');
     }
 
     else

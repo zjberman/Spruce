@@ -213,7 +213,7 @@ router.post('/delete', function(req, res) {
   // Grab the user session if logged in.
   var user = req.session.user;
   var name = req.body.name;
-  console.log(name + "\n\n\n\n\n\n\n\n\n")
+  console.log(name + "\n\n\n\n\n\n\n\n\n");
   if (user && online[name]) {
     delete online[name];
   }

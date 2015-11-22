@@ -103,8 +103,35 @@ router.get('/main', function(req, res) {
   else if (user && !online[user.name]) {
     req.flash('login', 'Login Expired');
     delete req.session.user;
-    res.redirect('/user/login')
+    res.redirect('/user/login');
   }
+  
+  else {
+    // capture the user object or create a default.
+    var message = req.flash('main') || 'Login Successful';
+    res.render('newsfeed', {username : user.name,
+                          button   : 'Logout',
+                          buttonwidth : 40,
+                          link     :'/user/logout'});
+  }
+});
+
+router.get('/branch', function(req,res) {
+  var user = req.session.user;
+
+  if(!user)
+  {
+    req.flash('login', 'Not logged in');
+    res.redirect('/user/login');
+  }
+  
+  else if(user && !online[user.name])
+  {
+    req.flash('login', 'Login Expired');
+    delete req.session.user;
+    res.redirect('/user/login');
+  }
+
   else if (user.admin) {
     var message = req.flash('main') || 'Login Successful';
     res.render('branch', {username : user.name,
@@ -123,6 +150,7 @@ router.get('/main', function(req, res) {
                           buttonwidth : 40,
                           link     :'/user/logout'});
   }
+
 });
 
 // Renders the users that are online.

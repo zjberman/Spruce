@@ -106,7 +106,7 @@ router.get('/main', function(req, res) {
   else {
     // capture the user object or create a default.
     var message = req.flash('main') || 'Login Successful';
-    res.render('user', { title   : 'User Main',
+    res.render('branch', { title   : 'User Main',
                          message : message,
                          name    : user.name });
   }

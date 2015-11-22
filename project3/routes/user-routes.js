@@ -105,6 +105,15 @@ router.get('/main', function(req, res) {
     delete req.session.user;
     res.redirect('/user/login');
   }
+  else if (user.admin) {
+    var message = req.flash('main') || 'Login Successful';
+    res.render('branch', {username : user.name,
+                          button   : 'Logout',
+                          buttonwidth : 20,
+                          link     :'/user/logout',
+                          adminbutton: 
+    "<a href = '/admin'><button class='sbtn'>Users</button></a>"
+                          });
   
   else {
     // capture the user object or create a default.

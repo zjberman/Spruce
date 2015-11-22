@@ -44,7 +44,7 @@
 		<td>
 			{{email}}
 		<td>
-			<input id="currentCheckbox" type="checkbox" name="admin" value="admin" onclick="isAdmin({{uid}});">
+			<input id="currentCheckbox" type="checkbox" name="" value="admin" onclick="isAdmin({{uid}});">
 			<script>
 				document.getElementById('currentCheckbox').checked = {{admin}};
 				document.getElementById('currentCheckbox').id = 'adminCheckbox' + {{uid}};
@@ -52,7 +52,7 @@
 		</td>
 		<td>
 			<form role="form" method="post" action="/admin/delete">
-				<button name= name>Delete</button>
+				<button name={{uid}}>Delete</button>
 			</form>
 		</td>
 	</tr>

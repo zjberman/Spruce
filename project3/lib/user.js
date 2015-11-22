@@ -234,6 +234,30 @@ exports.add = (u, cb) => {
   });
 };
 
+exports.delete = (name, cb) => {
+  var cursor = users.find({
+    username: name
+  });
+
+  cursor.forEach(function(err, doc) {
+    if(err)
+    {
+      console.log('error: ' + err);
+      return;
+    }
+
+    else if(doc === null)
+    {
+      cb(name);
+    }
+
+    else if(doc.username === name)
+    {
+      users.remove({username: name});
+    }
+});
+};
+
 // exports.add = (u, cb) => {
 //   // TODO: Add the add new user functionality.
 //   // The add function receives two arguments. The first, `u`, is an

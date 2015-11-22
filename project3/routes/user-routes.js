@@ -23,6 +23,7 @@ router.get('/login', (req, res) => {
     // Grab any messages being sent to us from redirect:
     var message = req.flash('login') || '';
     res.render('login', { button  : 'Register', 
+                          buttonwidth : 40,
                           link    : "/user/register" });
   }
 });
@@ -104,11 +105,22 @@ router.get('/main', function(req, res) {
     delete req.session.user;
     res.redirect('/user/login')
   }
+  else if (user.admin) {
+    var message = req.flash('main') || 'Login Successful';
+    res.render('branch', {username : user.name,
+                          button   : 'Logout',
+                          buttonwidth : 20,
+                          link     :'/user/logout',
+                          adminbutton: 
+    "<a href = '/admin'><button class='sbtn'>Users</button></a>"
+                          });
+  }
   else {
     // capture the user object or create a default.
     var message = req.flash('main') || 'Login Successful';
     res.render('branch', {username : user.name,
                           button   : 'Logout',
+                          buttonwidth : 40,
                           link     :'/user/logout'});
   }
 });
@@ -143,6 +155,7 @@ router.get('/register', (req, res) => {
      else
      {
         res.render('register', {button : "Login",
+                                buttonwidth : 40,
                                 link   : "/user/login"});
         // var name  = req.body.name;
         // var pass  = req.body.pass;

@@ -47,8 +47,8 @@ router.get('/list', (req, res) => {
 
           else
           {
-              var message = req.flash('user-list');
-              res.render('user-list', {message: message, users: allUsers});
+              var message = req.flash('admin');
+              res.render('admin', {message: message, users: allUsers});
           }
         });
      }
@@ -188,7 +188,20 @@ router.get('/', (req, res) => {
 
      else
      {
-        res.render('admin', {name: user.name, pass: user.pass, admin: user.admin, uid: user.uid});
+        var list = model.list(function(error, allUsers){
+
+          if(error)
+          {
+              req.flash('login', 'User already exists in database!');
+              res.redirect('/user/login');
+          }
+
+          else
+          {
+              var message = req.flash('admin');
+              res.render('admin', {message: message, users: allUsers});
+          }
+        });
      }
 });
 

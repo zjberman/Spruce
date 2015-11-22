@@ -111,9 +111,9 @@ exports.lookup = (usr, pass, cb) => {
   exports.list = (cb) => {
     var userList = [];
     var cursor = users.find(
-        {username: {$exists: true}}, {username: 1}
+        {username: {$exists: true}}
       );
-    cursor.foreEach(function(err, doc){
+    cursor.forEach(function(err, doc){
       if (err){
         console.log('error: ' + err);
         return;
@@ -121,7 +121,7 @@ exports.lookup = (usr, pass, cb) => {
 
       if(doc == null)
       {
-        return;
+        cb(undefined, userList);
       }
 
       else
@@ -131,8 +131,6 @@ exports.lookup = (usr, pass, cb) => {
 
 
     });
-
-    cb(undefined, userList);
   };
 // exports.list = (cb) => {
 //   // TODO: Add the list functionality.
@@ -203,9 +201,7 @@ exports.add = (u, cb) => {
         
         else if(doc2 !== null)
         {
-          console.log("Not null!");
           theUid = doc2.uid;
-          console.log(theUid);
           var newUser = users.insert({
             username: name,
             password: pass,

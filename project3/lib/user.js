@@ -79,7 +79,7 @@ exports.lookup = (usr, pass, cb) => {
       if(firstTime)
       {
         firstTime = false;
-        console.log("Wrong password!");
+        cb('password is invalid');
       }
 
       else

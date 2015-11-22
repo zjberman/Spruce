@@ -1,6 +1,11 @@
 <p class="sh1" style="margin: 10px 10px 10px 10px;">
 	User Administration
 </p>
+<script>
+	function isAdmin(uid){
+		alert(document.getElementById('adminCheckbox' + uid).checked);
+	}
+</script>
 <table class="table table-striped table-hover" style="margin:auto;width:90%;">
 	<thead>
 	<tr style="background:green;color:white;font-weight:bold;">
@@ -39,7 +44,11 @@
 		<td>
 			{{email}}
 		<td>
-			{{admin}}
+			<input id="currentCheckbox" type="checkbox" name="admin" value="admin" onclick="isAdmin({{uid}});">
+			<script>
+				document.getElementById('currentCheckbox').checked = {{admin}};
+				document.getElementById('currentCheckbox').id = 'adminCheckbox' + {{uid}};
+			</script>
 		</td>
 		<td>
 			{{{delete}}}

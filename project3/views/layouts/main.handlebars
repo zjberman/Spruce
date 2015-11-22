@@ -4,6 +4,11 @@
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script>
+	function pageAlert(s){
+		alert(s);
+	}
+</script>
 <style>
 html {
 	background-color: #e5ffe5;
@@ -11,6 +16,10 @@ html {
 body {
 	background-color: #e5ffe5;
 }
+.table-striped>tbody>tr:nth-of-type(odd)		{background-color:#f2f2f2;}
+.table-striped>tbody>tr:nth-of-type(even)		{background-color:#ffffff;}
+.table-hover>tbody>tr:hover:nth-of-type(odd)    {background-color:#ffffcc;}
+.table-hover>tbody>tr:hover:nth-of-type(even)	{background-color:#ffffe5;}
 .rounded {
 	-webkit-border-radius: 28;
 	-moz-border-radius: 28;
@@ -116,24 +125,27 @@ body {
 <div style="background-color:#e5ffe5;">
 	<div width="100%">
 		<span style="float:left;width:20%">
-			<p style="margin:auto;text-align:center;" class="sh1">Spruce</p>
+			<a href="/user/main" style="text-decoration:none;"><p style="margin:auto;text-align:center;" class="sh1">Spruce</p></a>
 		</span>
-		<span style="float:left;width:10%">
+		<span style="float:left;width:8%">
 			<div class="sbox">&nbsp</div>
 		</span>
-		<span style="float:left;width:10%">
+		<span style="float:left;width:8%">
 			<div class="sbox">&nbsp</div>
 		</span>
-		<span style="float:left;width:10%">
+		<span style="float:left;width:8%">
 			<div class="sbox">&nbsp</div>
 		</span>
-		<span style="float:left;width:10%">
+		<span style="float:left;width:8%">
 			<div class="sbox">&nbsp</div>
 		</span>
-		<span style="float:left;width:10%">
+		<span style="float:left;width:8%">
 			<div class="sbox">&nbsp</div>
 		</span>
-		<span style="float:left;width:30%">
+		<span style="float:left;width:{{buttonwidth}}%">
+			{{{adminbutton}}}
+		</span>
+		<span style="float:left;width:{{buttonwidth}}%">
 			<a href = "{{{link}}}">
 				<button class="sbtn">{{{button}}}</button>
 			</a>

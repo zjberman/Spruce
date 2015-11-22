@@ -202,10 +202,45 @@ router.get('/', (req, res) => {
               res.render('admin', {message: message, 
                                    users  : allUsers,
                                    button : "Logout",
+                                   buttonwidth: 40,
                                    link   : "/user/logout"});
           }
         });
      }
+});
+
+router.post('/delete', function(req, res) {
+  // Grab the user session if logged in.
+  var user = req.session.user;
+  var name = req.body.name;
+  console.log(name + "\n\n\n\n\n\n\n\n\n")
+  if (user && online[name]) {
+    delete online[name];
+  }
+
+  else if(!user || !online[user.name])
+  {
+    console.log("Offline?");
+    res.redirect('/user/login');
+  }
+
+  else
+  {
+    model.delete(name, function(error, name) {
+      if (error) {
+        // Pass a message to login:
+        req.flash('/', error);
+        res.redirect('/admin');
+      }
+      else {
+        
+        // Pass a message to main:
+        req.flash('/', 'Delete successful');
+        res.redirect('/admin');
+      }
+    });
+  }
+  
 });
 
 

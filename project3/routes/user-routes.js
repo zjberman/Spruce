@@ -108,7 +108,7 @@ router.get('/main', function(req, res) {
   
   else if (user.admin) {
     var message = req.flash('main') || 'Login Successful';
-    res.render('branch', {username : user.name,
+    res.render('newsfeed', {username : user.name,
                           button   : 'Logout',
                           buttonwidth : 20,
                           link     :'/user/logout',

@@ -163,7 +163,6 @@ exports.lookup = (usr, pass, cb) => {
 // };
 
 exports.add = (u, cb) => {
-  console.log("Made it into export!");
   theUid = null;
   var firstTime = true;
   var cursor = users.find({
@@ -181,7 +180,6 @@ exports.add = (u, cb) => {
 
     else if(doc === null && firstTime)
     {
-      console.log("Beginning to add...");
       firstTime = false;
       var name  = u.name; //needed because u.name can't be in push for some reason.
       var pass  = u.pass;
@@ -197,14 +195,12 @@ exports.add = (u, cb) => {
       uid.forEach(function(err, doc2){
         if(err)
         {
-          console.log("Error?");
           console.log("error: " + err);
           return;
         }
         
         else if(doc2 !== null)
         {
-          console.log("Adding to db!");
           theUid = doc2.uid;
           var newUser = users.insert({
             username: name,
@@ -213,7 +209,6 @@ exports.add = (u, cb) => {
             uid     : theUid,
             email   : email
           });
-          console.log("Almost there!");
           cb(undefined, newUser);
         }
       });
@@ -221,7 +216,6 @@ exports.add = (u, cb) => {
 
     else if(doc === null && firstTime === false)
     {
-      console.log("Should be end!");
       return;
     }
     else if(doc.username === u.name && firstTime)
@@ -239,11 +233,11 @@ exports.add = (u, cb) => {
   });
 };
 
-exports.delete = (name, cb) => {
-  var cursor = users.find({
-    username: name
-  });
-
+exports.change = (name, cb) => {
+  var firstTime = true;
+  var cursor = users.find(
+      {username: name}
+  );
   cursor.forEach(function(err, doc) {
     if(err)
     {
@@ -251,17 +245,57 @@ exports.delete = (name, cb) => {
       return;
     }
 
-    else if(doc === null)
+    else if(doc === null && firstTime)
     {
-      cb(name);
+      firstTime = false;
+      cb('Username does not exist!');
     }
 
-    else if(doc.username === name)
+    else if(doc === null && firstTime === false)
     {
-      users.remove({username: name});
+      return;
     }
-});
+    else if(doc.username === name && firstTime)
+    {
+      firstTime = false;
+      var changedUser = users.update({username: name}, {$set: {admin:(!doc.admin)}});
+      cb(undefined, changedUser);
+    }
+
+  });
 };
+
+// exports.deleting = (name, cb) => {
+//   var firstTime = true;
+//   var cursor = users.find(
+//       {username: name}
+//   );
+//   cursor.forEach(function(err, doc) {
+//     if(err)
+//     {
+//       console.log('error: ' + err);
+//       return;
+//     }
+
+//     else if(doc === null && firstTime)
+//     {
+//       firstTime = false;
+//       cb('Username does not exist!');
+//     }
+
+//     else if(doc === null && firstTime === false)
+//     {
+//       return;
+//     }
+//     else if(doc.username === name && firstTime)
+//     {
+//       firstTime = false;
+//       var deletedUser = users.remove({username: name});
+//       cb(undefined, deletedUser);
+//     }
+
+//   });
+// };
 
 // exports.add = (u, cb) => {
 //   // TODO: Add the add new user functionality.

@@ -10,7 +10,7 @@
 </script>
 <div width="100%">
 	<span style="float:right;margin:0px 50px 0px 0px;">
-		<form class="form-inline" role="form">
+		<form class="form-inline" role="form" name="name" method="post" action="/admin/change">
 			<div class="form-group">
 				<label>Add admin:</label>
 				<input class="form-control" id="addadmin" placeholder="Enter username">
@@ -22,16 +22,16 @@
 		<form class="form-inline" role="form">
 			<div class="form-group">
 				<label>Delete user:</label>
-				<input class="form-control" id="deleteuser" placeholder="Enter username">
+				<input class="form-control" name = "name" id="deleteuser" placeholder="Enter username">
 			</div>
 			<button type="submit" class="btn btn-default">Delete</button>
 		</form>
 	</span>
 	<span style="float:right;margin:10px 50px 20px 0px;">
-		<form class="form-inline" role="form">
+		<form class="form-inline" role="form" method="post" action="/admin/change">
 			<div class="form-group">
 				<label>Remove admin:</label>
-				<input class="form-control" id="removeadmin" placeholder="Enter username">
+				<input class="form-control" name="name" id="removeadmin" placeholder="Enter username">
 			</div>
 			<button type="submit" class="btn btn-default">Apply</button>
 		</form>

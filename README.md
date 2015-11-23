@@ -6,8 +6,16 @@ In the project3 folder, run:
 node app.js
 
 Libraries:
+express https://github.com/strongloop/express
+express-handlebars https://github.com/ericf/express-handlebars
+body-parser https://github.com/expressjs/body-parser
+express-session https://github.com/expressjs/session
+connect-flash https://github.com/jaredhanson/connect-flash
+cookie-parser https://github.com/expressjs/cookie-parser
+morgan https://github.com/expressjs/morgan
 
 Views:
+
 
 Statefulness:
 

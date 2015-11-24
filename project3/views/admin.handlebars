@@ -3,24 +3,16 @@
 </p>
 <script>
 	function autofillFields(s){
-		document.getElementById("addadmin").value    = s;
-		document.getElementById("deleteuser").value  = s;
-		document.getElementById("removeadmin").value = s;
+		document.getElementById("changeadmin").value = s;
 	}
 </script>
 <div width="100%">
-	<span style="float:right;margin:0px 50px 0px 0px;">
-		
-	</span>
-	<span style="float:left;margin:0px 0px 0px 50px;">
-		
-	</span>
-	<span style="float:right;margin:10px 50px 20px 0px;">
+	<span style="float:right;margin:0px 50px 20px 0px;">
 		<form class="form-inline" role="form" method="post" action="/admin/change">
 		<div>{{message}}</div><br>
 			<div class="form-group">
 				<label>Change admin status:</label>
-				<input class="form-control" name="name" id="removeadmin" placeholder="Enter username">
+				<input class="form-control" name="name" id="changeadmin" placeholder="Enter username">
 			</div>
 			<button type="submit" class="btn btn-default">Apply</button>
 		</form>

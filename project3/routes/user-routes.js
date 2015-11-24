@@ -244,7 +244,7 @@ router.post('/add', (req, res) => {
   var email = req.body.email;
 
   if (!name || !pass || !email) {
-    req.flash('register', 'did not provide the proper credentials');
+    req.flash('register', 'Error: Please make sure to provide all proper credentials.');
     res.redirect('/user/register');
   }
   else {

@@ -24,6 +24,7 @@ router.get('/login', (req, res) => {
     var message = req.flash('login') || '';
     res.render('login', { button  : 'Register', 
                           buttonwidth : 40,
+                          message:message,
                           link    : "/user/register" });
   }
 });
@@ -112,6 +113,7 @@ router.get('/main', function(req, res) {
                           button   : 'Logout',
                           buttonwidth : 20,
                           link     :'/user/logout',
+                          message: message,
                           adminbutton: 
     "<a href = '/admin'><button class='sbtn'>Users</button></a>"
                           });
@@ -122,6 +124,7 @@ router.get('/main', function(req, res) {
     res.render('newsfeed', {username : user.name,
                           button   : 'Logout',
                           buttonwidth : 40,
+                          message: message,
                           link     :'/user/logout'});
   }
 });
@@ -148,6 +151,7 @@ router.get('/branch', function(req,res) {
                           button   : 'Logout',
                           buttonwidth : 20,
                           link     :'/user/logout',
+                          message:message,
                           adminbutton: 
     "<a href = '/admin'><button class='sbtn'>Users</button></a>"
                           });
@@ -158,6 +162,7 @@ router.get('/branch', function(req,res) {
     res.render('branch', {username : user.name,
                           button   : 'Logout',
                           buttonwidth : 40,
+                          message:message,
                           link     :'/user/logout'});
   }
 
@@ -192,8 +197,10 @@ router.get('/register', (req, res) => {
 
      else
      {
+        var message = req.flash('register') || '';
         res.render('register', {button : "Login",
                                 buttonwidth : 40,
+                                message:message,
                                 link   : "/user/login"});
         // var name  = req.body.name;
         // var pass  = req.body.pass;
@@ -237,7 +244,7 @@ router.post('/add', (req, res) => {
   var email = req.body.email;
 
   if (!name || !pass || !email) {
-    req.flash('register', 'did not provide the proper credentials');
+    req.flash('register', 'Error: Please make sure to provide all proper credentials.');
     res.redirect('/user/register');
   }
   else {

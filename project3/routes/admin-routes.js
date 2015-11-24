@@ -203,6 +203,7 @@ router.get('/', (req, res) => {
                                    users  : allUsers,
                                    button : "Logout",
                                    buttonwidth: 40,
+                                   message:message,
                                    link   : "/user/logout"});
           }
         });

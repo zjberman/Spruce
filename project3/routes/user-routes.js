@@ -197,8 +197,10 @@ router.get('/register', (req, res) => {
 
      else
      {
+        var message = req.flash('register') || '';
         res.render('register', {button : "Login",
                                 buttonwidth : 40,
+                                message:message,
                                 link   : "/user/login"});
         // var name  = req.body.name;
         // var pass  = req.body.pass;

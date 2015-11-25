@@ -50,7 +50,7 @@ exports.lookup = (usr, pass, cb) => {
       if (firstTime) 
       {
         firstTime = false;
-        cb('user "' + usr + '" does not exist');
+        cb('User "' + usr + '" does not exist. Please try again.');
       }
 
       else
@@ -79,7 +79,7 @@ exports.lookup = (usr, pass, cb) => {
       if(firstTime)
       {
         firstTime = false;
-        cb('password is invalid');
+        cb('Invalid password. If you forgot your password, click the appropriate links below.');
       }
 
       else

@@ -44,7 +44,7 @@ router.post('/auth', (req, res) => {
     var pass = req.body.pass;
 
     if (!name || !pass) {
-      req.flash('login', 'did not provide the proper credentials');
+      req.flash('login', 'Please do not leave any fields blank.');
       res.redirect('/user/login');
     }
     else {
@@ -62,7 +62,7 @@ router.post('/auth', (req, res) => {
           req.session.user = user;
 
           // Pass a message to main:
-          req.flash('main', 'authentication successful');
+          req.flash('main', 'Authentication successful!');
           res.redirect('/user/main');
         }
       });
@@ -258,7 +258,7 @@ router.post('/add', (req, res) => {
       else {
         
         // Pass a message to main:
-        req.flash('login', 'authentication successful');
+        req.flash('login', 'Registration complete. You may now log in.');
         res.redirect('/user/login');
       }
     });

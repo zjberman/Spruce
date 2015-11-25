@@ -167,6 +167,7 @@ var router = express.Router();
 // });
 
 router.get('/', (req, res) => {
+
   var user = req.session.user;
      if(!user)
      {
@@ -214,31 +215,26 @@ router.post('/change', (req, res) => {
   var user = req.session.user;
   var name = req.body.name;
 
-  if(user && online[name])
-  {
+  if (user && online[name]) {
     delete online[name];
   }
 
-  if(!user || !online[user.name])
-  {
+  if (!user || !online[user.name]) {
     res.redirect('/user/login');
-  }
-
-  else if(user.admin)
-  {
-    model.change(name, function(error, aName){
-      if(error)
-      {
-        req.flash('/', error);
+  } 
+  else if (user.admin) {
+    model.change(name, function(error, aName) {
+      if (error) {
+        req.flash('admin', error);
         res.redirect('/admin');
-      }
-      else
-      {
-        req.flash('/', 'Delete successful');
+      } 
+      else {
+        req.flash('admin', 'Admin status changed.');
         res.redirect('/admin');
       }
     });
   }
+
 });
 // router.post('/deleting', (req, res) => {
 //   // Grab the user session if logged in.

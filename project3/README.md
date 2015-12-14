@@ -1,7 +1,16 @@
 Overview:
 	Spruce is a new social media platform providing an outlet for the diverse and creative projects we take on in our lives. Users may visually document important projects in their lives by uploading images of their progress to Spruce. These images are stored chronologically in 'branches' which represent the entire lifetime of the project. Branches are stored on the user's profile where they may be shared with just their friends, with the whole world, or kept private. Users may also discover new projects by others which they are interested in and follow them to receive updates when a new image is added.
 
+Final Design Document:
+https://docs.google.com/document/d/1MUZUGYgECDC9DY7J9aQmRkfiXW3aKdOoW1cEADve1tg/edit?usp=sharing
+
+Project Videos:
+https://www.youtube.com/watch?v=v1gBldyh6oM
+https://www.youtube.com/watch?v=XlYgp0obYT4
+https://www.youtube.com/watch?v=aS6lyj4YsQY
+
 How To Run:
+	Must have 'config.js' (not on github) in the project3 directory
 	In the project3 folder, run:
 	node app.js
 
@@ -33,7 +42,7 @@ Views:
 	register: Allows new user to register with the application by creating a username and password, and entering a valid email address. This will add the user to the database so that they may log in.
 
 Statefulness:
-	express-session is used to maintain session state in this application. When navigating to any page in the application, it will check certain properties in the session state, such as whether the user is logged in, online, and/or an admin. This will tell the application what should be displayed next. This information is stored on the server, so it is the same across all users running the application.
+	express-session is used to maintain session state in this application. When navigating to any page in the application, it will check certain properties in the session state, such as whether the user is logged in, online, and/or an admin. This will tell the application what should be displayed next, with an appropriate flash message if necessary. This information is stored on the server, so it is the same across all users running the application.
 
 Persistence:
-	Currently, our database only holds the set of users registered with the application. This includes their username, password, email, uid and admin status. For sample data we included tim, caleb, and hazel from the previous individual assignment. user.js is capable of finding, adding, changing, and listing contents of the database. These functions are used by user-routes.js and admin-routes.js to modify or request from the database. When a new user is registering, he/she will be added to the database and have a new, unique id dynamically assigned to them with a default user (not admin) status. When admin status of a user is changed, that is reflected in the information stored in the database. A user can be made an admin if a current admin goes to the admin view and enters that users name into the text box. Admins can also do this to strip a user of admin status if they are already an admin. When information is requested, it can then be included in the display, or used to check user credentials.
+	Currently, our database only holds the set of users registered with the application. This includes their username, password, email, uid and admin status. For sample data we included tim, caleb, and hazel from the previous individual assignment, as well as a few others we've created within the application. user.js is capable of finding, adding, changing, and listing contents of the database. These functions are used by user-routes.js and admin-routes.js to modify or request from the database. When a new user is registering, he/she will be added to the database and have a new, unique id dynamically assigned to them with a default user (not admin) status. When admin status of a user is changed, that is reflected in the information stored in the database. A user can be made an admin if a current admin goes to the admin view and enters that users name into the text box. Admins can also do this to strip a user of admin status if they are already an admin. An admin changing his/her own admin status will be automatically logged out. When information is requested, it can then be included in the display, or used to check user credentials.

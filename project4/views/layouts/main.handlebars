@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script>
+	function pageAlert(s){
+		alert(s);
+	}
+</script>
+<style>
+html {
+	background-color: #e5ffe5;
+}
+body {
+	background-color: #e5ffe5;
+}
+.table-striped>tbody>tr:nth-of-type(odd)		{background-color:#f2f2f2;}
+.table-striped>tbody>tr:nth-of-type(even)		{background-color:#ffffff;}
+.table-hover>tbody>tr:hover:nth-of-type(odd)    {background-color:#ffffcc;}
+.table-hover>tbody>tr:hover:nth-of-type(even)	{background-color:#ffffe5;}
+.rounded {
+	-webkit-border-radius: 28;
+	-moz-border-radius: 28;
+	border-radius: 28px;
+}
+.sh1 {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 24px;
+	font-weight: bold;
+	color: #009900;
+}
+.sbox {
+	background-color: gray;
+	border: 5px solid gray;
+	margin: 4px 5px;
+}
+.roundbox {
+	background: #e5ffe5;
+	background-color: green;
+	background-image: -webkit-linear-gradient(top, #008c21, #045200);
+	background-image: -moz-linear-gradient(top, #008c21, #045200);
+	background-image: -ms-linear-gradient(top, #008c21, #045200);
+	background-image: -o-linear-gradient(top, #008c21, #045200);
+	background-image: linear-gradient(to bottom, #008c21, #045200);
+	margin: auto 5px;
+	-webkit-border-radius: 28;
+	-moz-border-radius: 28;
+	border-radius: 28px;
+}
+.formbox {
+	background: #eef6ee;
+	background-image: -webkit-linear-gradient(top, #eef6ee, #cde5cd);
+	background-image: -moz-linear-gradient(top, #eef6ee, #cde5cd);
+	background-image: -ms-linear-gradient(top, #eef6ee, #cde5cd);
+	background-image: -o-linear-gradient(top, #eef6ee, #cde5cd);
+	background-image: linear-gradient(to bottom, #eef6ee, #cde5cd);
+	border: 2px solid gray;
+	margin: auto 5px;
+	-webkit-border-radius: 28;
+	-moz-border-radius: 28;
+	border-radius: 28px;
+	height:100%;
+}
+.fbbtn {
+	background: #5765ff;
+	background-image: -webkit-linear-gradient(top, #5765ff, #0000ff);
+	background-image: -moz-linear-gradient(top, #5765ff, #0000ff);
+	background-image: -ms-linear-gradient(top, #5765ff, #0000ff);
+	background-image: -o-linear-gradient(top, #5765ff, #0000ff);
+	background-image: linear-gradient(to bottom, #5765ff, #0000ff);
+	-webkit-border-radius: 28;
+	-moz-border-radius: 28;
+	border-radius: 28px;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: bold;
+	color: #ffffff;
+	font-size: 16px;
+	text-decoration: none;
+	width:40%;
+	min-height:30px;
+	display: block;
+	margin: 15px auto;
+}
+.fbbtn:hover {
+	background: #00e1ff;
+	background-image: -webkit-linear-gradient(top, #00e1ff, #5c72ff);
+	background-image: -moz-linear-gradient(top, #00e1ff, #5c72ff);
+	background-image: -ms-linear-gradient(top, #00e1ff, #5c72ff);
+	background-image: -o-linear-gradient(top, #00e1ff, #5c72ff);
+	background-image: linear-gradient(to bottom, #00e1ff, #5c72ff);
+	text-decoration: none;
+}
+.sbtn {
+	background: #ebebeb;
+	background-image: -webkit-linear-gradient(top, #ebebeb, #b5b5b5);
+	background-image: -moz-linear-gradient(top, #ebebeb, #b5b5b5);
+	background-image: -ms-linear-gradient(top, #ebebeb, #b5b5b5);
+	background-image: -o-linear-gradient(top, #ebebeb, #b5b5b5);
+	background-image: linear-gradient(to bottom, #ebebeb, #b5b5b5);
+	-webkit-border-radius: 28;
+	-moz-border-radius: 28;
+	border-radius: 28px;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: bold;
+	color: #009900;
+	font-size: 20px;
+	text-decoration: none;
+	width:70%;
+	display: block;
+	margin:3px auto;
+}
+.sbtn:hover {
+	background: #f2f2f2;
+	background-image: -webkit-linear-gradient(top, #f2f2f2, #e0e0e0);
+	background-image: -moz-linear-gradient(top, #f2f2f2, #e0e0e0);
+	background-image: -ms-linear-gradient(top, #f2f2f2, #e0e0e0);
+	background-image: -o-linear-gradient(top, #f2f2f2, #e0e0e0);
+	background-image: linear-gradient(to bottom, #f2f2f2, #e0e0e0);
+	text-decoration: none;
+}
+</style>
+<head>
+<div style="background-color:#e5ffe5;">
+	<div width="100%">
+		<span style="float:left;width:20%">
+			<a href="/user/main" style="text-decoration:none;"><p style="margin:auto;text-align:center;" class="sh1">Spruce</p></a>
+		</span>
+		<span style="float:left;width:8%">
+			<div class="sbox">&nbsp</div>
+		</span>
+		<span style="float:left;width:8%">
+			<div class="sbox">&nbsp</div>
+		</span>
+		<span style="float:left;width:8%">
+			<div class="sbox">&nbsp</div>
+		</span>
+		<span style="float:left;width:8%">
+			<div class="sbox">&nbsp</div>
+		</span>
+		<span style="float:left;width:8%">
+			<div class="sbox">&nbsp</div>
+		</span>
+		<span style="float:left;width:{{buttonwidth}}%">
+			{{{adminbutton}}}
+		</span>
+		<span style="float:left;width:{{buttonwidth}}%">
+			<a href = "{{{link}}}">
+				<button class="sbtn">{{{button}}}</button>
+			</a>
+		</span>
+	</div>
+	<div style="clear: both; float: left; display: block; position: relative; margin: 5px;">
+	</div>
+	<div class="roundbox" style="clear:both;height:60px;"></div>
+</div>
+</head>
+<body>
+	{{{body}}}
+</body>
+</html>

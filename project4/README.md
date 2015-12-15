@@ -3,7 +3,7 @@ Overview:
 
 Final Design Document:
 
-https://docs.google.com/document/d/1MUZUGYgECDC9DY7J9aQmRkfiXW3aKdOoW1cEADve1tg/edit?usp=sharing
+https://drive.google.com/file/d/0B6AtaZhieEMYU24tVml0SDV6cEk/view?usp=sharing
 
 Project Videos:
 
@@ -15,8 +15,9 @@ https://www.youtube.com/watch?v=aS6lyj4YsQY
 
 How To Run:
 
-	Must have 'config.js' (not on github) in the project3 directory
-	In the project3 folder, run:
+	Instructions for 'config.js' are available on Moodle
+	Must have 'config.js' in the project4 directory
+	In the project4 folder, run:
 	node app.js
 
 Libraries:
